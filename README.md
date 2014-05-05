@@ -1,7 +1,7 @@
-borderlands_parser
+Borderlands SHiFT codes parser
 ==================
 
-Script for parsing Borderlands 2 SHiFT Codes from social networks and sending them by email
+Script for parsing Borderlands 2 SHiFT Codes from social networks and sending them by email.
 
 About SHiFT Codes: http://borderlands.wikia.com/wiki/SHiFT
 
