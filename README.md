@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/vapkarian/borderlands_parser.png?label=ready&title=Ready)](https://waffle.io/vapkarian/borderlands_parser)
 Borderlands SHiFT codes parser
 ==================
 
