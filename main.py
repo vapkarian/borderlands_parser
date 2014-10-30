@@ -21,14 +21,10 @@ EMAIL_SUBJECT = 'SHiFT Codes'
 
 
 def parse_source(url, prefix_re):
-    """
-    Parse html page from url and find SHiFT codes with special prefix (i.e. for PC only).
+    """Parse html page from url and find SHiFT codes with special prefix (i.e. for PC only).
 
-    :param url: url of page with SHiFT codes
-    :type url: str or unicode
-    :param prefix_re: pattern of special prefix of SHiFT codes for this page
-    :type prefix_re: str or unicode
-    :return: keys from page
+    :param str|unicode url: url of page with SHiFT codes
+    :param str|unicode prefix_re: pattern of special prefix of SHiFT codes for this page
     :rtype: list
     """
     code_re = '-'.join(repeat('\w{5,5}', 5))
@@ -45,23 +41,18 @@ def main(user, password, host=None, port=None, email_to=None, subject=None, ps=F
     """
     Parse pages from SOURCES, save new keys into file and send them to recipient from email_to.
 
-    :param user: username to use for the SMTP server
-    :type user: str or unicode
-    :param password: password to use for the SMTP server
-    :type password: str or unicode
-    :param host: the host to use for sending email (default: EMAIL_HOST)
-    :type host: str or unicode
-    :param port: port to use for the SMTP server (default: EMAIL_PORT)
-    :type port: str or unicode or int
-    :param email_to: list of email recipients separated by space (default: own user)
-    :type email_to: str or unicode
-    :param subject: subject of the message (default: EMAIL_SUBJECT)
-    :type subject: str or unicode
+    :param str|unicode user: username to use for the SMTP server
+    :param str|unicode password: password to use for the SMTP server
+    :param str|unicode host: the host to use for sending email (default: EMAIL_HOST)
+    :param str|unicode|int port: port to use for the SMTP server (default: EMAIL_PORT)
+    :param str|unicode email_to: list of email recipients separated by space (default: own user)
+    :param str|unicode subject: subject of the message (default: EMAIL_SUBJECT)
+    :param bool ps: parse Pre-Sequel codes instead of Borderlands 2
     """
     host = host or EMAIL_HOST
     port = port or 587
     email_to = email_to or [user]
-    subject = '%s: %s' % (subject or EMAIL_SUBJECT, 'Borderlands 2' if not ps else 'Borderlands Pre-Sequel')
+    subject = subject or '%s: %s' % (EMAIL_SUBJECT, 'Borderlands 2' if not ps else 'Borderlands Pre-Sequel')
 
     filename = os.path.join(os.path.dirname(__file__), '.borderlands_codes')
     if os.path.isfile(filename):

@@ -2,7 +2,7 @@
 Borderlands SHiFT codes parser
 ==================
 
-Script for parsing Borderlands 2 SHiFT Codes from social networks and sending them by email.
+Script for parsing Borderlands 2 and Borderlands Pre-Sequel SHiFT Codes from social networks and sending them by email.
 
 **About SHiFT Codes**: http://borderlands.wikia.com/wiki/SHiFT
 
@@ -20,13 +20,14 @@ In both case you can provide next parameters:
  - port (optional): port to use for the SMTP server (default: 587)
  - email_to (optional): list of email recipients separated by space (default: own user)
  - subject (optional): subject of the message (default: "SHiFT Codes")
+ - ps (optional): find and parse Pre-Sequel codes instead of Borderland 2 (default: False)
 
 If you import this module, you can override next parameters:
  - EMAIL_HOST: default of "host" parameter
  - EMAIL_PORT: default of "port" parameter
  - EMAIL_SUBJECT: default of "subject" parameter
- - SOURCES: tuple of ("url", "prefix_re"), where "url" is url of page where SHiFT Codes are placed and "prefix_re" is
-    pattern of special prefix of SHiFT codes for this page
+ - BL2_SOURCES or BLPS_SOURCES: tuple of ("url", "prefix_re"), where "url" is url of page where SHiFT Codes are placed
+    and "prefix_re" is pattern of special prefix of SHiFT codes for this page
 
 Example of usage:<br>
 `import borderlands_parser`<br>
