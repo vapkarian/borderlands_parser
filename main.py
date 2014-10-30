@@ -7,9 +7,13 @@ import os
 import re
 
 
-SOURCES = (
+BL2_SOURCES = (
     ('https://twitter.com/duvalmagic', 'WinPC/Mac: '),
     ('https://www.facebook.com/Borderlands2ShiftCodes', 'Borderlands 2.{10,200}PC: '),
+)
+BLPS_SOURCES = (
+    ('https://twitter.com/duvalmagic', 'WinPC/Mac/Linux: '),
+    ('https://www.facebook.com/Borderlands2ShiftCodes', 'The Pre-Sequel!.{10,200}PC: '),
 )
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -37,7 +41,7 @@ def parse_source(url, prefix_re):
     return keys
 
 
-def main(user, password, host=None, port=None, email_to=None, subject=None):
+def main(user, password, host=None, port=None, email_to=None, subject=None, ps=False):
     """
     Parse pages from SOURCES, save new keys into file and send them to recipient from email_to.
 
@@ -57,7 +61,7 @@ def main(user, password, host=None, port=None, email_to=None, subject=None):
     host = host or EMAIL_HOST
     port = port or 587
     email_to = email_to or [user]
-    subject = subject or EMAIL_SUBJECT
+    subject = '%s: %s' % (subject or EMAIL_SUBJECT, 'Borderlands 2' if not ps else 'Borderlands Pre-Sequel')
 
     filename = os.path.join(os.path.dirname(__file__), '.borderlands_codes')
     if os.path.isfile(filename):
@@ -66,8 +70,9 @@ def main(user, password, host=None, port=None, email_to=None, subject=None):
     else:
         existed_keys = []
 
+    sources = BL2_SOURCES if not ps else BLPS_SOURCES
     parsed_keys = []
-    for url, prefix_re in SOURCES:
+    for url, prefix_re in sources:
         parsed_keys.extend(parse_source(url, prefix_re))
 
     new_keys = set(parsed_keys) - set(existed_keys)
@@ -95,5 +100,6 @@ if __name__ == '__main__':
     parser.add_argument('--port', help='Port to use for the SMTP server (default: %s)' % EMAIL_PORT)
     parser.add_argument('--email_to', nargs='+', help='List of email recipients separated by space (default: own user)')
     parser.add_argument('--subject', help='Subject of the message (default: "%s")' % EMAIL_SUBJECT)
+    parser.add_argument('-ps', action="store_true", help='Find and parse Pre-Sequel codes instead of Borderland 2')
     args = parser.parse_args()
     main(**args.__dict__)
