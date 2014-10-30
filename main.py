@@ -6,10 +6,10 @@ import urllib2
 import os
 import re
 
+
 SOURCES = (
-    ('https://twitter.com/gearboxsoftware', 'PC.*SHiFT Code.*'),
-    ('https://twitter.com/duvalmagic', 'WinPC/Mac.*'),
-    ('https://www.facebook.com/Borderlands2ShiftCodes', 'PC.*'),
+    ('https://twitter.com/duvalmagic', 'WinPC/Mac: '),
+    ('https://www.facebook.com/Borderlands2ShiftCodes', 'Borderlands 2.{10,200}PC: '),
 )
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
